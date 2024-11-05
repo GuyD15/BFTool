@@ -11,12 +11,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Serve static files from the root directory (for index.html and style.css)
-app.use(express.static(__dirname));
-
-// Serve static files from the src directory (for app.js)
-app.use('/src', express.static(path.join(__dirname, 'src')));
-
 // MySQL Database Connection
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -87,7 +81,7 @@ app.get("/pages", (req, res) => {
 
         Promise.all(promises)
             .then(pagesWithSubpages => {
-                console.log("Fetched pages with subpages:", JSON.stringify(pagesWithSubpages, null, 2));// Log to confirm structure
+                console.log("Fetched pages with subpages:", pagesWithSubpages); // Log to confirm structure
                 res.json(pagesWithSubpages);
             })
             .catch(err => {
@@ -113,38 +107,14 @@ app.post("/pages", authenticateToken, (req, res) => {
     });
 });
 
-// Update a page or subpage (admin-only)
-app.put("/pages/:id", authenticateToken, (req, res) => {
-    const { title, content } = req.body;
-    const { id } = req.params;
-    db.query("UPDATE pages SET title = ?, content = ? WHERE id = ?", [title, content, id], (err) => {
-        if (err) {
-            console.error("Error updating page:", err);
-            return res.status(500).send(err);
-        }
-        res.json({ id, title, content });
-    });
-});
-
-// Delete a page or subpage (admin-only)
-app.delete("/pages/:id", authenticateToken, (req, res) => {
-    const { id } = req.params;
-    db.query("DELETE FROM pages WHERE id = ?", [id], (err) => {
-        if (err) {
-            console.error("Error deleting page:", err);
-            return res.status(500).send(err);
-        }
-        res.json({ message: "Page deleted successfully" });
-    });
-});
-
-// Serve the main index.html file for all other routes
+// Serve static files (like index.html, if you have a frontend in a "public" folder)
+app.use(express.static(path.join(__dirname, "public")));
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Start server
-const PORT = 3000;
+// Start the server on the specified port or default to 3000
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
