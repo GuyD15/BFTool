@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BF Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>BF Tool</h1>
+        <input type="checkbox" id="themeToggle">
+        <button id="adminLoginButton">Admin Login</button>
+        <button id="logoutButton" style="display: none;">Logout</button>
+    </header>
+
+    <!-- Search bar -->
+    <div id="searchContainer">
+        <input type="text" id="searchInput" placeholder="Search pages...">
+    </div>
+
+    <main>
+        <div id="sidebar">
+            <h2>Pages</h2>
+            <div id="pagesList"></div>
+            <button id="createPageButton" style="display: none;">Create New Page</button>
+            <button id="createSubpageButton" style="display: none;">Add Subpage</button>
+        </div>
+
+        <div id="contentArea">
+            <h2 id="pageTitle">Select a page to view content</h2>
+            <p id="pageContent">Content will appear here.</p>
+            <button id="editButton" style="display: none;">Edit Page</button>
+            <button id="deleteButton" style="display: none;">Delete Page</button>
+        </div>
+    </main>
+
+    <!-- Login Form -->
+    <div id="loginContainer" style="display: none;">
+        <form id="loginForm">
+            <h2>Admin Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Login</button>
+            <button type="button" id="cancelLogin">Cancel</button>
+        </form>
+    </div>
+
+    <!-- Add/Edit Page Form -->
+    <div id="addPageFormContainer" style="display: none;">
+        <form id="addPageForm">
+            <h2 id="formTitle">Add a New Page</h2>
+            <label for="title">Title:</label>
+            <input type="text" id="title" required>
+            <label for="content">Content:</label>
+            <textarea id="content" rows="10" required></textarea>
+            <button type="submit" id="formSubmitButton">Save</button>
+            <button type="button" id="cancelAddPage">Cancel</button>
+        </form>
+    </div>
+
+    <script src="./src/app.js"></script>
+</body>
+</html>

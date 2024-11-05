@@ -1,0 +1,296 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body styling */
+body {
+    background-color: #f4f6f8;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header styling */
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin-right: auto;
+}
+
+#adminLoginButton, #logoutButton {
+    background-color: #0056b3;
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+#adminLoginButton:hover, #logoutButton:hover {
+    background-color: #004494;
+}
+
+/* Dark mode toggle switch */
+#themeToggle {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    -webkit-appearance: none;
+    outline: none;
+    background: #c6c6c6;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-right: 15px;
+}
+
+#themeToggle:checked {
+    background: #4caf50;
+}
+
+#themeToggle:before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    top: 1px;
+    left: 1px;
+    transition: 0.3s;
+}
+
+#themeToggle:checked:before {
+    left: 21px;
+}
+
+/* Search bar styling */
+#searchContainer {
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 0 20px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+/* Main container */
+main {
+    display: flex;
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 0 20px;
+}
+
+/* Sidebar styling */
+#sidebar {
+    width: 250px;
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+#sidebar h2 {
+    margin-bottom: 15px;
+}
+
+/* Styling for main pages and subpages */
+.main-page {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s;
+}
+
+.main-page:hover {
+    background-color: #f0f0f0;
+}
+
+.main-page::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.2s ease;
+}
+
+.main-page.expanded::before {
+    transform: rotate(90deg);
+    content: "▼";
+}
+
+/* Chapter/Lesson Container */
+.chapter-container {
+    margin-left: 20px;
+    padding-left: 10px;
+    border-left: 2px solid #ddd;
+    display: none; /* initially hidden, shown when expanded */
+}
+
+.main-page.expanded + .chapter-container {
+    display: block; /* show container when main page is expanded */
+}
+
+.subpage {
+    padding: 6px;
+    margin-left: 15px;
+    font-style: italic;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.subpage:hover {
+    background-color: #e6e6e6;
+}
+
+/* Content area */
+#contentArea {
+    flex: 1;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+#pageTitle {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
+
+#pageContent {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Form styling */
+#loginContainer, #addPageFormContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+#loginContainer h2, #addPageFormContainer h2 {
+    margin-bottom: 20px;
+}
+
+#loginForm label, #addPageForm label {
+    display: block;
+    margin-top: 10px;
+}
+
+#loginForm input, #addPageForm input, #addPageForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+#addPageForm textarea {
+    min-height: 200px;
+    resize: vertical;
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.1s;
+    background-color: #007bff;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+#editButton, #deleteButton {
+    margin-right: 10px;
+}
+
+/* Toast message style */
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; bottom: 10px; }
+}
+
+/* Dark mode adjustments */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode #sidebar {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode .main-page {
+    background-color: #333;
+}
+
+body.dark-mode .main-page:hover {
+    background-color: #555;
+}
+
+body.dark-mode .subpage {
+    background-color: #444;
+}
+
+body.dark-mode .subpage:hover {
+    background-color: #666;
+}
+
+body.dark-mode #contentArea {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode input, body.dark-mode textarea {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+}
